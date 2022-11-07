@@ -1,0 +1,24 @@
+[
+  {
+  "model": "trivia.Trivia",
+  "pk": 1,
+  "fields": {"question": "Who, in 1903, was the first woman to win a Nobel Prize?",
+    "answer_one": "Marie Curie",
+    "answer_two": "Rosalind Franklin",
+    "answer_three": "Lise Meitner",
+    "answer_four": "Ada Lovelace",
+    "correct": "Marie Curie",
+    "genre": "history"}
+  },
+  {
+  "model": "trivia.Trivia",
+  "pk": 2,
+  "fields": {"question": "What year did the Berlin wall fall?",
+    "answer_one": "1988",
+    "answer_two": "1990",
+    "answer_three": "1989",
+    "answer_four": "1991",
+    "correct": "1989",
+    "genre": "history"}
+  }
+]
