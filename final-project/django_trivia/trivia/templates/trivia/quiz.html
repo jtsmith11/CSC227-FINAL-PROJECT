@@ -1,0 +1,345 @@
+{% extends 'trivia/dependencies.html' %}
+ 
+{% block content %}
+{% load static %}
+	
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			background-image: url("https://www.designyourway.net/diverse/darkpat/COLOURlovers.com-Gothic_Wallpaper.jpg");
+		}
+
+		#triviaForm {
+			background-color: rgba(92, 92, 92, .75);
+			border: solid 1px;
+			border-radius: 10px;
+			border-color: #474747;
+			color: #d6d6d6;
+			margin: 50px auto;
+			font-family: Raleway;
+			padding: 20px;
+			width: 80%;
+			min-width: 600px;
+			min-height: 400px;
+			max-width: 700px;
+			max-height: 800px;
+			overflow:auto;
+		}
+		
+		.tab {
+			display: none;
+		}
+
+		.tab.active{
+			display: block;
+		}
+
+		.invisible {
+			display: none;
+		}
+
+		h1 {
+			text-align: center;  
+		}
+		
+		ul {
+			list-style: none;
+			margin:0;
+			padding: 0;
+			display: flex;
+			align-items: left;
+		}
+
+		ul li {
+			background: #333333;
+			color: #ffffff;
+			padding: 1px 1px 1px 1px;
+			margin-left: 5px;
+			margin-bottom: 5px;
+			border-radius: 10%;
+			cursor: pointer;
+			opacity: .5;
+			width: 19px;
+			text-align: center;
+			border-radius: 3px;
+		}
+
+		ul li.active{
+			opacity: 1 !important;
+		}
+
+		button {
+			background-color: #333333;
+			color: #ffffff;
+			border: solid 1px;
+			border-radius: 10px;
+			border-color: #474747;
+			font-size: 17px;
+			font-family: Raleway;
+			cursor: pointer;
+		}
+
+		.next.disable,
+		.previous.disable{
+			  cursor: none;
+			  opacity: 0.4;
+		}
+
+		button:hover {
+			opacity: 0.8;
+		}
+		
+		.choice {
+			border: solid 1px;
+			border-radius: 10px;
+			border-color: #474747;
+			margin-top: 3px;
+			margin-bottom: 2px;
+			padding-top: 8px;
+			padding-left: 5px;
+			width: auto;
+			background-color: #707070;
+		}
+		
+		.form-group {
+			font-size: 20px;
+			border: solid 1px;
+			border-radius: 10px;
+			border-color: #474747;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			padding-top: 10px;
+			padding-left: 10px;
+			min-height: auto;
+			width: auto;
+			height: 12%;
+			background-color: #707070;
+		}
+		
+		input[type=radio].radio-input {
+			accent-color: #333333;
+		}
+		
+		#formGuideButtons {
+			overflow:auto;
+			border: solid 1px;
+			border-radius: 10px;
+			border-color: #474747;
+			background-color: #707070;
+			margin-top: 10px;
+		}
+		
+		#navFieldSet {
+			border: solid 1px;
+			border-radius: 10px;
+			border-color: #474747;
+			background-color: #707070;
+			margin-top: 10px;
+		}
+		
+		#navFieldSet legend {
+			width: auto;
+			background-color: #333333;
+			color: #ffffff;
+			border: solid 1px;
+			border-radius: 10px;
+			border-color: #474747;
+			font-size: 15px;
+			font-family: Raleway;
+			padding: 1px 1px 1px 1px;
+			
+		}
+		
+		#questionBlock {
+			float: left;
+			width: 75%;
+		}
+		
+		#questionNavBlock {
+			float: right;
+			width: 20%;
+		}
+		
+
+	</style>
+
+
+<div class="triviaContainer">
+ 
+	<form id="triviaForm" method='post' action=''>
+	
+		<div id="questionBlock">
+	 
+			{% csrf_token %}
+			
+			{% for q in questions%}
+			
+			{% if forloop.first %}
+			
+			<div class="tab tab-{{forloop.counter}} active" id="r{{forloop.counterk}}">
+				<div class="form-group">
+				  <label for="question">{{q.question}}</label>
+				</div>
+				
+				<div class="form-check">
+					<div class="choice">
+						<label class="radio-label" for="answer1">
+							<input class="radio-input" type="radio" name={{q.id}} id="answer1" value="{{q.answer_one}}" checked>
+							{{q.answer_one}}
+						</label>
+					</div>
+					
+					<div class="choice">
+						<label class="radio-label" for="answer2">
+							<input class="radio-input" type="radio" name={{q.id}} id="answer2" value="{{q.answer_two}}">
+							{{q.answer_two}}
+						</label>
+					</div>
+					
+					<div class="choice">
+						<label class="radio-label" for="answer3">
+							<input class="radio-input" type="radio" name={{q.id}} id="answer3" value="{{q.answer_three}}">
+							{{q.answer_three}}
+						</label>
+					</div>
+					
+					<div class="choice">
+						<label class="radio-label" for="answer4">
+							<input class="radio-input" type="radio" name={{q.id}} id="answer4" value="{{q.answer_four}}">
+							{{q.answer_four}}
+						</label>
+					</div>
+				</div>
+			</div>
+			
+			{% else %}
+			
+			<div class="tab tab-{{forloop.counter}}" id="r{{forloop.counter}}">
+				<div class="form-group">
+				  <label for="question">{{q.question}}</label>
+				</div>
+				
+				<div class="form-check">
+					<div class="choice">
+						<label class="radio-label" for="answer1">
+							<input class="radio-input" type="radio" name={{q.id}} id="answer1" value="{{q.answer_one}}" checked>
+							{{q.answer_one}}
+						</label>
+					</div>
+					
+					<div class="choice">
+						<label class="radio-label" for="answer2">
+							<input class="radio-input" type="radio" name={{q.id}} id="answer2" value="{{q.answer_two}}">
+							{{q.answer_two}}
+						</label>
+					</div>
+					
+					<div class="choice">
+						<label class="radio-label" for="answer3">
+							<input class="radio-input" type="radio" name={{q.id}} id="answer3" value="{{q.answer_three}}">
+							{{q.answer_three}}
+						</label>
+					</div>
+					
+					<div class="choice">
+						<label class="radio-label" for="answer4">
+							<input class="radio-input" type="radio" name={{q.id}} id="answer4" value="{{q.answer_four}}">
+							{{q.answer_four}}
+						</label>
+					</div>
+				</div>
+			</div>
+			
+			{% endif %}
+			
+			{% endfor %}
+			
+			<div id="formGuideButtons">
+				<div style="float:left;">
+					<button type="submit" value="Submit">Submit</button>
+				</div>
+				<div style="float:right;">
+					<button type="button" class="previous disable" id="previous">Previous</button>
+					<button type="button" class="next" id="next">Next</button>
+				</div>
+			</div>
+		
+		</div>
+		
+		<div id="questionNavBlock">
+		
+			<fieldset id="navFieldSet">
+				<legend>Questions</legend>
+				<ul class="nav">
+				{% for q  in questions %}
+				
+					{% if forloop.first %}
+				
+					<li class="active" data-cont="r{{forloop.counter}}">{{forloop.counter}}</li>
+					
+					{% else %}
+					
+					<li data-cont="r{{forloop.counter}}">{{forloop.counter}}</li>
+					
+					{% endif %}
+				
+				{% endfor %}
+				</ul>
+			</fieldset>
+		</div>
+	</form>
+	
+    {% block script %}
+	<script>
+		let currentSection = 0;
+		let sections = document.querySelectorAll(".tab");
+		let sectionButtons = document.querySelectorAll(".nav > li");
+		let nextButton = document.querySelector(".next");
+		let previousButton = document.querySelector(".previous");
+		for (let i = 0; i < sectionButtons.length; i++) {
+			sectionButtons[i].addEventListener("click", function() {
+				sections[currentSection].classList.remove("active");
+				sectionButtons[currentSection].classList.remove("active");
+				sections[currentSection = i].classList.add("active");
+				sectionButtons[currentSection].classList.add("active");
+				if (i === 0) {
+					if (previousButton.className.split(" ").indexOf("disable") < 0) {
+						previousButton.classList.add("disable");
+					}
+				} else {
+					if (previousButton.className.split(" ").indexOf("disable") >= 0) {
+						previousButton.classList.remove("disable");
+					}
+				}
+				if (i === sectionButtons.length - 1) {
+					if (nextButton.className.split(" ").indexOf("disable") < 0) {
+						nextButton.classList.add("disable");
+					}
+				} else {
+					if (nextButton.className.split(" ").indexOf("disable") >= 0) {
+						nextButton.classList.remove("disable");
+					}
+				}
+			});
+		}
+
+		nextButton.addEventListener("click", function() {
+			if (currentSection < sectionButtons.length - 1) {
+				sectionButtons[currentSection + 1].click();
+			}
+		});
+
+		previousButton.addEventListener("click", function() {
+			if (currentSection > 0) {
+				sectionButtons[currentSection - 1].click();
+			}
+		});
+	</script>
+    {% endblock script %}
+	
+</div>
+{% endblock %}

@@ -1,0 +1,235 @@
+{% extends 'trivia/dependencies.html' %}
+
+{% block content %}
+
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			background-image: url("https://www.designyourway.net/diverse/darkpat/COLOURlovers.com-Gothic_Wallpaper.jpg");
+		}
+
+		#resultBlock {
+			background-color: rgba(92, 92, 92, .75);
+			border: solid 1px;
+			border-radius: 10px;
+			border-color: #474747;
+			color: #d6d6d6;
+			margin: 50px auto;
+			font-family: Raleway;
+			padding: 10px;
+			width: 50%;
+			min-width: 100px;
+			min-height: 200px;
+			max-width: 700px;
+			max-height: 800px;
+			overflow:auto;
+		}
+		
+		.resultContainer {
+			border: solid 1px;
+			border-radius: 10px;
+			border-color: #474747;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			padding-top: 10px;
+			padding-left: 10px;
+			min-height: auto;
+			width: auto;
+			height: auto;
+			margin: auto;
+			background-color: #707070;
+			text-align: center;
+		}
+		
+		.result-title {
+			font-size: 40px;
+		}
+		
+		.result-text {
+			font-size: 17px;
+		}
+		
+		#guideButtons {
+			background-color: #707070;
+			margin-top: 20px;
+		}
+		
+		.result-text-format {
+			color: #ff0000;
+		}
+		
+		.tab {
+			display: none;
+		}
+
+		.tab.active{
+			display: block;
+		}
+
+		.invisible {
+			display: none;
+		}
+
+		h1 {
+			text-align: center;  
+		}
+		
+		ul {
+			list-style: none;
+			margin:0;
+			padding: 0;
+			display: flex;
+			align-items: left;
+		}
+
+		ul li {
+			background: #333333;
+			color: #ffffff;
+			padding: 1px 1px 1px 1px;
+			margin-left: 5px;
+			margin-bottom: 5px;
+			border-radius: 10%;
+			cursor: pointer;
+			opacity: .5;
+			width: 19px;
+			text-align: center;
+			border-radius: 3px;
+		}
+
+		ul li.active{
+			opacity: 1 !important;
+		}
+
+		button {
+			background-color: #333333;
+			color: #ffffff;
+			border: solid 1px;
+			border-radius: 10px;
+			border-color: #474747;
+			font-size: 17px;
+			font-family: Raleway;
+			cursor: pointer;
+		}
+		
+		a {
+			text-decoration:none;
+			color: #ffffff;
+		}
+		
+		a:hover {
+			text-decoration:none;
+			color: #ffffff;
+		}
+
+		.next.disable,
+		.previous.disable{
+			  cursor: none;
+			  opacity: 0.4;
+		}
+
+		button:hover {
+			opacity: 0.8;
+		}
+		
+		.choice {
+			border: solid 1px;
+			border-radius: 10px;
+			border-color: #474747;
+			margin-top: 3px;
+			margin-bottom: 2px;
+			padding-top: 8px;
+			padding-left: 5px;
+			width: auto;
+			background-color: #707070;
+		}
+		
+		.form-group {
+			font-size: 20px;
+			border: solid 1px;
+			border-radius: 10px;
+			border-color: #474747;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			padding-top: 10px;
+			padding-left: 10px;
+			min-height: auto;
+			width: auto;
+			height: 12%;
+			background-color: #707070;
+		}
+		
+		input[type=radio].radio-input {
+			accent-color: #333333;
+		}
+		
+		#navFieldSet {
+			border: solid 1px;
+			border-radius: 10px;
+			border-color: #474747;
+			background-color: #707070;
+			margin-top: 10px;
+		}
+		
+		#navFieldSet legend {
+			width: auto;
+			background-color: #333333;
+			color: #ffffff;
+			border: solid 1px;
+			border-radius: 10px;
+			border-color: #474747;
+			font-size: 15px;
+			font-family: Raleway;
+			padding: 1px 1px 1px 1px;
+			
+		}
+		
+		#questionBlock {
+			float: left;
+			width: 75%;
+		}
+		
+		#questionNavBlock {
+			float: right;
+			width: 20%;
+		}
+		
+
+	</style>
+
+<div id="resultBlock">
+	<div class="resultContainer">
+        <h5 class="result-title">jtsmith11 Cloud Trivia app</h5>
+
+        <p class="result-text">Select the quiz you want to take.</p>
+		<div id="formGuideButtons">
+			<div style="float:left;">
+				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'history' '10' %}">Take the 10 question history quiz</a></button>
+				<br>
+				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'history' '20' %}">Take the 20 question history quiz</a></button>
+				<br>
+				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'history' '30' %}">Take the 30 question history quiz</a></button>
+				<br>
+				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'history' '40' %}">Take the 40 question history quiz</a></button>
+				<br>
+				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'history' '50' %}">Take the 50 question history quiz</a></button>
+			</div>
+			<div style="float:right;">
+				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'culture' '10' %}">Take the 10 question culture quiz</a></button>
+				<br>
+				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'culture' '20' %}">Take the 20 question culture quiz</a></button>
+				<br>
+				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'culture' '30' %}">Take the 30 question culture quiz</a></button>
+				<br>
+				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'culture' '40' %}">Take the 40 question culture quiz</a></button>
+				<br>
+				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'culture' '50' %}">Take the 50 question culture quiz</a></button>
+			</div>
+		</div>
+    </div>
+</div>
+ 
+{% endblock %}

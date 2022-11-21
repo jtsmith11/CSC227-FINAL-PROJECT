@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from trivia.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', home, name='home'),
+    # path('quiz/', quiz, name='quiz')
+    path('quiz/<str:genre>/<int:question_total>', quiz, name = 'quiz'),
 ]
