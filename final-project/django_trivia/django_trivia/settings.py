@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-(d)gt1zjdi+969iqz$$p-j5t-cp6y33o*%5o$we(t8lnv%r*=a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['jtsmith11-trivia-deploy-app-jtsmith11-deploy-app.apps.na46a.prod.ole.redhat.com']
+ALLOWED_HOSTS = ['jtsmith11-trivia-deploy-app-jtsmith11-trivia-deploy-app.apps.na46a.prod.ole.redhat.com']
 
 
 # Application definition
