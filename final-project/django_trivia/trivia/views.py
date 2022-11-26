@@ -35,7 +35,7 @@ def quiz(request, genre = 'history', question_total = '20'):
 
         return render(request, 'trivia/results.html', context)
     else:
-        questions = Trivia.objects.filter(genre='history').order_by('?')[:int(question_total)]
+        questions = Trivia.objects.filter(genre=genre).order_by('?')[:int(question_total)]
 
         order = list()
 
