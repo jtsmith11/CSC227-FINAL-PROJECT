@@ -22,11 +22,12 @@
 			font-family: Raleway;
 			padding: 10px;
 			width: 80%;
-			min-width: 100px;
-			min-height: 200px;
-			max-width: 550px;
-			max-height: 800px;
+			min-width: fit-content;
+			min-height: fit-content;
+			max-width: fit-content;
+			max-height: fit-content;
 			overflow:auto;
+			display: flex;
 		}
 		
 		.homeContainer {
@@ -36,14 +37,15 @@
 			margin-top: 10px;
 			margin-bottom: 10px;
 			padding-top: 10px;
-			padding-bottom: 10px;
+			padding-bottom: 10%;
 			padding-left: 10px;
 			padding-right: 10px;
 			min-height: auto;
 			width: auto;
-			height: auto;
+			height: 50%;
+			max-height: 350px;
+			max-width: 350px;
 			margin: auto;
-			background-color: #707070;
 			text-align: center;
 		}
 		
@@ -56,13 +58,14 @@
 			padding-top: 10px;
 			padding-left: 10px;
 			padding-right: 10px;
-			min-height: 10%;
-			min-width: 20%;
-			width: auto;
-			height: auto;
+			min-height: fit-content;
+			min-width: fit-content;
+			width: fit-content;
+			height: 50%;
 			margin: auto;
-			background-color: rgba(70, 70, 70, .75);
+			background-color: #707070;
 			text-align: center;
+			display: flex;
 		}
 		
 		.home-title {
@@ -133,10 +136,10 @@
 			font-size: 17px;
 			font-family: Raleway;
 			cursor: pointer;
-			min-height: 80px;
-			max-height: 100px;
-			min-width: 220px;
-			max-width: 270px;
+			min-height: auto;
+			max-height: auto;
+			min-width: auto;
+			max-width: auto;
 		}
 		
 		a {
@@ -221,11 +224,23 @@
 			width: 20%;
 		}
 		
-		.box {
-			width: 20%;
+		.boxLeft {
+			width: 40%;
 			height: 10%;
 			margin: 10px;
 			float: left;
+		}
+		
+		.boxRight {
+			width: 40%;
+			height: 10%;
+			margin: 10px;
+			float: right;
+		}
+		
+		.quizOptions {
+			padding: 10px;
+			display: flex;
 		}
 		
 		.selectLabel {
@@ -235,6 +250,15 @@
 			border-radius: 10px;
 		}
 		
+		.dropdownOption {
+			  font-size: 17px;
+			  padding: 5px 5px 5px 5px;
+			  background: rgba(95, 95, 95, .95);
+			  color: white;
+			  border: 1px solid rgba(50, 50, 50, .75);
+			  border-radius: 6px;
+			  position: relative;
+		}
 
 	</style>
 
@@ -245,28 +269,30 @@
         <p class="home-text">Select the quiz you want to take.</p>
 		<div id="formGuide">
 			<form onsubmit='redirectQuiz(); return false'>
-				<div class="box">
-					<fieldset class="selectLabel">
-						<legend>Genre</legend>
-						<select id="genre" name="genre">
-							<option value="history">History</option>
-							<option value="sports">Sports</option>
-						</select>
-					</fieldset>
+				<div class="quizOptions">
+					<div class="boxLeft">
+						<fieldset class="selectLabel">
+							<legend>Genre</legend>
+							<select id="genre" name="genre" class="dropdownOption">
+								<option value="history">History</option>
+								<option value="sports">Sports</option>
+							</select>
+						</fieldset>
+					</div>
+					<div class="boxRight">
+						<fieldset class="selectLabel">
+							<legend>Size</legend>
+							<select id="size" name="size" class="dropdownOption">
+								<option value="10">10</option>
+								<option value="20">20</option>
+								<option value="30">30</option>
+								<option value="40">40</option>
+								<option value="50">50</option>
+							</select>
+						</fieldset>
+					</div>
 				</div>
-				<div class="box">
-					<fieldset class="selectLabel">
-						<legend>Size</legend>
-						<select id="size" name="size">
-							<option value="10">10</option>
-							<option value="20">20</option>
-							<option value="30">30</option>
-							<option value="40">40</option>
-							<option value="50">50</option>
-						</select>
-					</fieldset>
-				</div>
-				<div class="box">
+				<div class="boxButton">
 					<button>Take the quiz!</button>
 				</div>
 			</form>

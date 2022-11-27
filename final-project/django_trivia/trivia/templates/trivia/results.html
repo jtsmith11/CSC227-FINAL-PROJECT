@@ -28,6 +28,7 @@
 			min-height: 400px;
 			max-width: 700px;
 			max-height: 1000px;
+			overflow:auto;
 		}
 		
 		.resultContainer {
@@ -43,7 +44,6 @@
 			width: auto;
 			height: auto;
 			margin: auto;
-			background-color: #707070;
 			text-align: center;
 		}
 		
@@ -62,6 +62,7 @@
 		
 		.result-text-format {
 			color: #ff0000;
+			font-weight: bold;
 		}
 		
 		.tab {
@@ -115,10 +116,10 @@
 			font-size: 17px;
 			font-family: Raleway;
 			cursor: pointer;
-			min-height: 50px;
-			max-height: 60px;
-			min-width: 150px;
-			max-width: 170px;
+			min-height: auto;
+			max-height: 50px;
+			min-width: 100px;
+			max-width: auto;
 			padding: 1%;
 			margin: 2%;
 		}
@@ -247,7 +248,7 @@
         <p class="result-text">Of the <span class="result-text-format">{{total}}</span> questions you answered, you were correct on <span class="result-text-format">{{correct}}</span> of them! You can retake this quiz again, or return to the home page and select a new quiz.</p>
 		<div id="formGuideButtons">
 			<div style="float:left;">
-				<button type="button" class="previous" id="previous"><a href="{{request.META.HTTP_REFERER}}">Retake this quiz</a></button>
+				<button type="button" class="previous" id="previous"><a href="{{request.META.HTTP_REFERER}}">Retake</a></button>
 			</div>
 			<div style="float:right;">
 				<button type="button" class="next" id="next"><a href="{% url 'home' %}">Home</a></button>
