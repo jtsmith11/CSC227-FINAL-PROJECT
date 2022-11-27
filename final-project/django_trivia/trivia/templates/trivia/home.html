@@ -12,7 +12,7 @@
 			background-image: url("https://www.designyourway.net/diverse/darkpat/COLOURlovers.com-Gothic_Wallpaper.jpg");
 		}
 
-		#resultBlock {
+		#homeBlock {
 			background-color: rgba(92, 92, 92, .75);
 			border: solid 1px;
 			border-radius: 10px;
@@ -24,19 +24,21 @@
 			width: 80%;
 			min-width: 100px;
 			min-height: 200px;
-			max-width: 700px;
+			max-width: 550px;
 			max-height: 800px;
 			overflow:auto;
 		}
 		
-		.resultContainer {
+		.homeContainer {
 			border: solid 1px;
 			border-radius: 10px;
 			border-color: #474747;
 			margin-top: 10px;
 			margin-bottom: 10px;
 			padding-top: 10px;
+			padding-bottom: 10px;
 			padding-left: 10px;
+			padding-right: 10px;
 			min-height: auto;
 			width: auto;
 			height: auto;
@@ -45,11 +47,29 @@
 			text-align: center;
 		}
 		
-		.result-title {
+		#formGuide {
+			border: solid 1px;
+			border-radius: 10px;
+			border-color: #474747;
+			margin-top: 10px;
+			margin-bottom: 10px;
+			padding-top: 10px;
+			padding-left: 10px;
+			padding-right: 10px;
+			min-height: 10%;
+			min-width: 20%;
+			width: auto;
+			height: auto;
+			margin: auto;
+			background-color: rgba(70, 70, 70, .75);
+			text-align: center;
+		}
+		
+		.home-title {
 			font-size: 40px;
 		}
 		
-		.result-text {
+		.home-text {
 			font-size: 17px;
 		}
 		
@@ -58,7 +78,7 @@
 			margin-top: 20px;
 		}
 		
-		.result-text-format {
+		.home-text-format {
 			color: #ff0000;
 		}
 		
@@ -113,6 +133,10 @@
 			font-size: 17px;
 			font-family: Raleway;
 			cursor: pointer;
+			min-height: 80px;
+			max-height: 100px;
+			min-width: 220px;
+			max-width: 270px;
 		}
 		
 		a {
@@ -197,39 +221,64 @@
 			width: 20%;
 		}
 		
+		.box {
+			width: 20%;
+			height: 10%;
+			margin: 10px;
+			float: left;
+		}
+		
+		.selectLabel {
+			background-color: rgba(50, 50, 50, .75);
+			margin: 2%;
+			padding: 3%;
+			border-radius: 10px;
+		}
+		
 
 	</style>
 
-<div id="resultBlock">
-	<div class="resultContainer">
-        <h5 class="result-title">jtsmith11 Cloud Trivia app</h5>
+<div id="homeBlock">
+	<div class="homeContainer">
+        <h5 class="home-title">jtsmith11 Cloud Trivia app</h5>
 
-        <p class="result-text">Select the quiz you want to take.</p>
-		<div id="formGuideButtons">
-			<div style="float:left;">
-				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'history' '10' %}">Take the 10 question history quiz</a></button>
-				<br>
-				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'history' '20' %}">Take the 20 question history quiz</a></button>
-				<br>
-				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'history' '30' %}">Take the 30 question history quiz</a></button>
-				<br>
-				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'history' '40' %}">Take the 40 question history quiz</a></button>
-				<br>
-				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'history' '50' %}">Take the 50 question history quiz</a></button>
-			</div>
-			<div style="float:right;">
-				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'sports' '10' %}">Take the 10 question sports quiz</a></button>
-				<br>
-				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'sports' '20' %}">Take the 20 question sports quiz</a></button>
-				<br>
-				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'sports' '30' %}">Take the 30 question sports quiz</a></button>
-				<br>
-				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'sports' '40' %}">Take the 40 question sports quiz</a></button>
-				<br>
-				<button type="button" class="previous" id="previous"><a href="{% url 'quiz' 'sports' '50' %}">Take the 50 question sports quiz</a></button>
-			</div>
+        <p class="home-text">Select the quiz you want to take.</p>
+		<div id="formGuide">
+			<form onsubmit='redirectQuiz(); return false'>
+				<div class="box">
+					<fieldset class="selectLabel">
+						<legend>Genre</legend>
+						<select id="genre" name="genre">
+							<option value="history">History</option>
+							<option value="sports">Sports</option>
+						</select>
+					</fieldset>
+				</div>
+				<div class="box">
+					<fieldset class="selectLabel">
+						<legend>Size</legend>
+						<select id="size" name="size">
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="30">30</option>
+							<option value="40">40</option>
+							<option value="50">50</option>
+						</select>
+					</fieldset>
+				</div>
+				<div class="box">
+					<button>Take the quiz!</button>
+				</div>
+			</form>
 		</div>
     </div>
 </div>
+
+<script>
+	var redirectQuiz = function() {
+		window.location.href= window.location.href + "quiz/" + document.getElementById("genre").value 
+			+ "/" + document.getElementById("size").value;
+	};
+</script>
  
 {% endblock %}
