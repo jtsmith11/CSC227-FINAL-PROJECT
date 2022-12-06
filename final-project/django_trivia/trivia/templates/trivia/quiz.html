@@ -303,6 +303,9 @@
 		let sectionButtons = document.querySelectorAll(".nav > li");
 		let nextButton = document.querySelector(".next");
 		let previousButton = document.querySelector(".previous");
+		
+		// Add event listeners to the selection buttons so that the user
+		// can click on the question they wish to jump to
 		for (let i = 0; i < sectionButtons.length; i++) {
 			sectionButtons[i].addEventListener("click", function() {
 				sections[currentSection].classList.remove("active");
@@ -310,32 +313,41 @@
 				sections[currentSection = i].classList.add("active");
 				sectionButtons[currentSection].classList.add("active");
 				if (i === 0) {
+					// Disable previous button if on the first question
 					if (previousButton.className.split(" ").indexOf("disable") < 0) {
 						previousButton.classList.add("disable");
 					}
 				} else {
+					// Remove the disable class if not on the first question
 					if (previousButton.className.split(" ").indexOf("disable") >= 0) {
 						previousButton.classList.remove("disable");
 					}
 				}
 				if (i === sectionButtons.length - 1) {
+					// Disable next button if on the last question
 					if (nextButton.className.split(" ").indexOf("disable") < 0) {
 						nextButton.classList.add("disable");
 					}
 				} else {
+					// Remove the disable class if not on the last question
 					if (nextButton.className.split(" ").indexOf("disable") >= 0) {
 						nextButton.classList.remove("disable");
 					}
 				}
 			});
 		}
-
+		
+		// Add event listeners to the next button so that the user
+		// can go to the next question
 		nextButton.addEventListener("click", function() {
 			if (currentSection < sectionButtons.length - 1) {
+				// Increase the section button by 
 				sectionButtons[currentSection + 1].click();
 			}
 		});
 
+		// Add event listeners to the previous button so that the user
+		// can go to the previous question
 		previousButton.addEventListener("click", function() {
 			if (currentSection > 0) {
 				sectionButtons[currentSection - 1].click();

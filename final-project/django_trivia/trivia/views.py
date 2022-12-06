@@ -22,9 +22,11 @@ def quiz(request, genre = 'history', question_total = '20'):
         print(request.POST)
 
         for t in trivia_questions:
-
+            
+            # bool value to keep track of if the question is correct
             correct_status = False
 
+            # Check if the question response is correct or not
             if t.correct == response_data.get(str(t.id)):
                 correct+=1
                 correct_status = True
@@ -32,19 +34,20 @@ def quiz(request, genre = 'history', question_total = '20'):
             if str(t.id) in response_data:
                 total+=1
 
+                # Change status to "Correct" or "Incorrect"
                 if correct_status == True:
                     status = "Correct"
                 else:
-                    status = "False"
+                    status = "Incorrect"
 
+                # Append the results list with question, the user's response,
+                # the correct answer, and the status
                 results_list.append({"question":t.question,
                                    "yourAnswer":response_data.get(str(t.id)),
                                    "correctAnswer":t.correct,
                                     "status":status})
 
-        print("2")
-
-
+        # Get the percentage correct
         percentage = round(((correct / total) * 100), 2)
 
         context = {
@@ -56,6 +59,17 @@ def quiz(request, genre = 'history', question_total = '20'):
 
         return render(request, 'trivia/results.html', context)
     else:
+        # Set question_total to 1 if anything lower than that is passed
+        # to avoid a divide by zero error
+        if question_total < 1:
+            question_total = 1
+
+        # Check to make sure the specified genre is in the database. If not,
+        # set the genre to a random existing genre as a default.
+        if Trivia.objects.filter(genre=genre).exists() is False:
+            genre = Trivia.objects.all().order_by('?')[0].genre
+
+        # Grab random questions of the specified genre and quiz size
         questions = Trivia.objects.filter(genre=genre).order_by('?')[:int(question_total)]
 
         order = list()
