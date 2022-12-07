@@ -125,4 +125,8 @@ STATICFILES_DIRS=[BASE_DIR/'static']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Run on port 8080
 RUN_SERVER_PORT = 8080
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
